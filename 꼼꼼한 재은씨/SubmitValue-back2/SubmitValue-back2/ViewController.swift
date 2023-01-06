@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultUpdate: UILabel!
     @IBOutlet weak var resultInterval: UILabel!
     
-    var paramEmail: String?
-    var paramUpdate: Bool?
-    var paramInterval: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +20,29 @@ class ViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let email = paramEmail {
+//        let ad = UIApplication.shared.delegate as? AppDelegate
+//
+//        if let email = ad?.paramEmail {
+//            resultEmail.text = email
+//        }
+//        if let update = ad?.paramUpdate{
+//            resultUpdate.text = update == true ? "자동갱신":"갱신안함"
+//        }
+//        if let interval = ad?.paramInterval {
+//            resultInterval.text = "\(Int(interval))분"
+//        }
+        
+        let ud = UserDefaults.standard
+        
+        if let email = ud.string(forKey: "email") {
             resultEmail.text = email
         }
-        if let update = paramUpdate {
-            resultUpdate.text = update==true ? "자동갱신":"갱신안함"
-        }
-        if let interval = paramInterval {
-            resultInterval.text = "\(Int(interval))분"
-        }
+        
+        let update = ud.bool(forKey: "isUpdate")
+        resultUpdate.text = (update == true ? "자동갱신":"갱신안함")
+        
+        let interval = ud.double(forKey: "interval")
+        resultInterval.text = "\(Int(interval))분"
     }
 
 }

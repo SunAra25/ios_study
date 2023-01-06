@@ -8,7 +8,7 @@
 import UIKit
 
 class FormViewController: UIViewController {
-
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var isUpdate: UISwitch!
     @IBOutlet weak var interval: UIStepper!
@@ -19,7 +19,7 @@ class FormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -38,25 +38,22 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func onSubmit(_ sender: Any) {
-        let preVC = self.navigationController?.viewControllers
+        //AppDelegate 객체 인스턴스
+        //        let ad = UIApplication.shared.delegate as? AppDelegate
+        //
+        //        ad?.paramEmail = self.email.text
+        //        ad?.paramUpdate = self.isUpdate.isOn
+        //        ad?.paramInterval = self.interval.value
+        //
+        //        self.presentingViewController?.dismiss(animated: true)
+        //    }
+        //UserDefault 객체의 인스턴스
+        let ud = UserDefaults.standard
         
-        guard let vc = preVC as? ViewController else {
-            return
-        }
+        ud.set(self.email.text, forKey: "email")
+        ud.set(self.isUpdate.isOn, forKey: "isUpdate")
+        ud.set(self.interval.value, forKey: "interval")
         
-        vc.paramEmail = self.email.text
-        vc.paramUpdate = self.isUpdate.isOn
-        vc.paramInterval = self.interval.value
+        self.presentingViewController?.dismiss(animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
