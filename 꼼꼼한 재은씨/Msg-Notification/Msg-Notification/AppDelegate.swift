@@ -8,18 +8,20 @@
 import UIKit
 import UserNotifications
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     
     //앱이 처음 실행될 때 호출되는 메소드
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if #available(iOS 10.0, *) {
+        if #available(iOS 11.0, *) {
             //시스템에서 제공하는 인스턴스 받아오기
             let notiCenter = UNUserNotificationCenter.current()
             //requestAuthorization으로 알림 설정에 대한 동의 받기
             notiCenter.requestAuthorization(options: [.alert, .badge, .sound]) {
                 (didAllow, e) in}
+            notiCenter.delegate = self
             
         } else {
             let setting = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -27,6 +29,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if notification.request.identifier == "wakeup" {
+            let userInfo = notification.request.content.userInfo
+            print(userInfo["name"]!)
+        }
+        completionHandler([.banner, .list, .badge, .sound])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.notification.request.identifier == "wakeup" {
+            let userInfo = response.notification.request.content.userInfo
+            print(userInfo["name"]!)
+        }
+        completionHandler()
+    }
+    
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -40,33 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
-    //앱이 활성화 상태를 잃었을 때
-    func applicationWillResignActive(_ application: UIApplication) {
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().getNotificationSettings { settings in
-                //사용자가 알림 받는것에 동의했는지 확인
-                if settings.authorizationStatus == UNAuthorizationStatus.authorized {
-                    //발송할 내용 정의
-                    let nContent = UNMutableNotificationContent()
-                    nContent.badge = 1 //앱 아이콘에 표시될 값 (뱃지)
-                    nContent.title = "로컬 알림 메세지"
-                    nContent.subtitle = "준비된 내용 짱많 얼른 다시 앱 열어조"
-                    nContent.body = "앗! 왜 나갔어요?ㅜ"
-                    nContent.sound = UNNotificationSound.default
-                    nContent.userInfo = ["name" : "ARa"]
-                    
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                    let request = UNNotificationRequest(identifier: "wakeup", content: nContent, trigger: trigger)
-                    
-                    UNUserNotificationCenter.current().add(request)
-                } else {
-                    print("사용자가 동의하지 않음")
-                }
-            }
-        }
-    }
-    
     
     
 }
