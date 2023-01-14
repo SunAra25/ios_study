@@ -14,6 +14,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YkM-F3-sYp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JNh-8J-QFk">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <tabBarAppearance key="scrollEdgeAppearance">
@@ -25,22 +26,11 @@
                         <segue destination="e9t-WK-Oif" kind="relationship" relationship="viewControllers" id="e94-ck-pFx"/>
                         <segue destination="g3F-XJ-IOQ" kind="relationship" relationship="viewControllers" id="qlQ-WC-KYP"/>
                         <segue destination="RkP-uC-Tad" kind="relationship" relationship="viewControllers" id="oLV-Wf-7BY"/>
-                        <segue destination="agr-zT-4gK" kind="relationship" relationship="viewControllers" id="DdA-pa-Ry7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46T-mT-kGL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.64122137404578" y="3.5211267605633805"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="2O2-0B-ctU">
-            <objects>
-                <viewControllerPlaceholder id="agr-zT-4gK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ZcO-bg-kz1"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yA3-f4-keP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1102" y="-13"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FkM-dl-JVZ">
@@ -49,6 +39,7 @@
                     <tabBarItem key="tabBarItem" badgeValue="N" systemItem="favorites" id="tbC-4q-Gxb"/>
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aSG-DP-PSm">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -96,6 +87,15 @@
                     <view key="view" contentMode="scaleToFill" id="ODF-eU-tkG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YU-62-W2I">
+                                <rect key="frame" x="175" y="302" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="tQy-i3-iUV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
